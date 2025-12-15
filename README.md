@@ -1,5 +1,7 @@
 # SOC Analyst AI
 
+![Project Demo](demo.png)
+
 An AI-powered security tool that analyzes logs to identify attack vectors and suggests remediation.
 
 ## Architecture
