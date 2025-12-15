@@ -2,6 +2,8 @@
 
 [Project Demo](demo.png)
 
+**Live Demo:** [Click Here](https://cf-ai-soc-analyst.pages.dev)
+
 An AI-powered security tool that analyzes logs to identify attack vectors and suggests remediation.
 
 ## Architecture
