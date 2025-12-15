@@ -1,10 +1,14 @@
 # SOC Analyst AI
 
-[Project Demo](demo.png)
-
-**Live Demo:** [Click Here](https://cf-ai-soc-analyst.pages.dev)
 
 An AI-powered security tool that analyzes logs to identify attack vectors and suggests remediation.
+
+
+[Project Demo](demo.png)
+
+**Live Demo:** [Click Here](https://cf-ai-soc-analyst.pages.dev)\
+**Try it yourself:** Copy and paste this log it into the analyzer:`192.168.1.105 - - [15/Dec/2025:14:32:00] "GET /shop?id=1' UNION SELECT 1,2--"`\
+
 
 ## Architecture
 - **Frontend:** Cloudflare Pages (HTML/JS)
