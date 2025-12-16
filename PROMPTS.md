@@ -1,5 +1,8 @@
 # AI Prompt History
 
+**Note:** I used Google Gemini throughout the development process. Below are the primary prompts I used to generate the system architecture and code. I have omitted small debugging and syntax questions for clarity.
+
+
 ## Prompt 1:
 "I need to build a log analysis tool using Cloudflare's platform. The main goal is to create a 'SOC Analyst AI' where a user can paste a log, and an LLM explains what it means. 
 The project has to include: Cloudflare Workers (backend logic), Workers AI (Llama 3 for analysis), Workers KV (analyzed log history), and Cloudflare Pages (HTML frontend). 
@@ -14,5 +17,4 @@ The system prompt should tell the AI to act as a SOC Analyst. Save the log and t
 Make sure the AI's answer appears on the screen under the button as a readable report. Use simple CSS with clean whites, grays, and orange accents to make it look like a professional security tool."
 
 ## Prompt 4:
-"Define the specific task for the Llama 3 model. The AI must act as a specialized Cybersecurity Analyst. The output needs to be structured and concise, covering three points:
-1) Identify the specific attack vector (SQLi, XSS, etc.), 2) Explain why it is dangerous, and 3) Suggest a specific WAF rule or Regex to block it."
+"Define the specific task for the Llama 3 model. The AI must act as a specialized Cybersecurity Analyst. The output needs to be structured and concise, covering three points: 1) Identify the specific attack vector (SQLi, XSS, etc.), 2) Explain why it is dangerous, and 3) Suggest a specific WAF rule or Regex to block it."
