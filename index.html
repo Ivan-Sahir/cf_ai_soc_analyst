@@ -38,7 +38,7 @@
             const resultDiv = document.getElementById('result');
             const btn = document.querySelector('button');
             
-            // YOUR WORKER URL
+            // WORKER URL
             const WORKER_URL = "https://cf-ai-soc-analyst.ryan-benson-lab.workers.dev/";
 
             if(!logLine.trim()) return alert("Please enter a log line");
@@ -56,7 +56,7 @@
                 
                 const data = await response.json();
                 
-                // Format the AI response nicely
+                // Format the AI response 
                 if (data.response) {
                     resultDiv.innerHTML = "<strong>THREAT ANALYSIS REPORT:</strong>\n\n" + data.response;
                 } else {
