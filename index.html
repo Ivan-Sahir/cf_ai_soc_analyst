@@ -32,40 +32,30 @@
         <div id="result"></div>
     </div>
 
-    <script>
+<script>
         async function analyzeLog() {
-            const logLine = document.getElementById('logInput').value;
-            const resultDiv = document.getElementById('result');
-            const btn = document.querySelector('button');
+            const inputField = document.getElementById('logInput');
+            const resultBox = document.getElementById('result');
             
-            // WORKER URL
+
+            resultBox.style.display = 'block';
+            resultBox.innerHTML = "Analyzing...";
+
             const WORKER_URL = "https://cf-ai-soc-analyst.ryan-benson-lab.workers.dev/";
 
-            if(!logLine.trim()) return alert("Please enter a log line");
+            const response = await fetch(WORKER_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ log_line: inputField.value }) 
+            });
+            
+            const data = await response.json();
 
-            resultDiv.style.display = 'block';
-            resultDiv.innerHTML = "<div class='loading'>Analyzing threat signature with Llama-3...</div>";
-            btn.disabled = true;
-
-            try {
-                const response = await fetch(WORKER_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ log_line: logLine })
-                });
-                
-                const data = await response.json();
-                
-                // Format the AI response 
-                if (data.response) {
-                    resultDiv.innerHTML = "<strong>THREAT ANALYSIS REPORT:</strong>\n\n" + data.response;
-                } else {
-                    resultDiv.innerHTML = "Error: No response from AI.";
-                }
-            } catch (err) {
-                resultDiv.innerText = "Connection Error: " + err.message;
+            if (data.response) {
+                resultBox.innerHTML = data.response;
+            } else {
+                resultBox.innerHTML = "Error: AI could not analyze this log.";
             }
-            btn.disabled = false;
         }
     </script>
 </body>
