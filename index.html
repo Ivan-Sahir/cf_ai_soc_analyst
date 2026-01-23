@@ -43,15 +43,15 @@
 
             const WORKER_URL = "https://cf-ai-soc-analyst.ryan-benson-lab.workers.dev/";
 
-            const response = await fetch(WORKER_URL, {
+            const workerResponse = await fetch(WORKER_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ log_line: inputField.value }) 
             });
             
-            const data = await response.json();
+            const analysisResult = await response.json();
 
-            if (data) {
+            if (analysisResult) {
                 resultBox.innerHTML = data;
             } else {
                 resultBox.innerHTML = "Error: AI could not analyze this log.";
