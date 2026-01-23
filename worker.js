@@ -11,8 +11,8 @@ export default {
     }
 
 
-    const data = await request.json();
-    const userLog = data.log_line; 
+    const userInput = await request.json();
+    const userLog = userInput.log_line; 
 
     const aiResponse = await env.AI.run("@cf/meta/llama-3-8b-instruct", {
       messages: [
