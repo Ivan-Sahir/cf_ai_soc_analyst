@@ -52,7 +52,7 @@
             const analysisResult = await response.json();
 
             if (analysisResult) {
-                resultBox.innerHTML = data;
+                resultBox.innerHTML = analysisResult;
             } else {
                 resultBox.innerHTML = "Error: AI could not analyze this log.";
             }
