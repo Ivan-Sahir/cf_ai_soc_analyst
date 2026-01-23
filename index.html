@@ -49,7 +49,7 @@
                 body: JSON.stringify({ log_line: inputField.value }) 
             });
             
-            const analysisResult = await response.json();
+            const analysisResult = await workerResponse.json();
 
             if (analysisResult) {
                 resultBox.innerHTML = analysisResult;
