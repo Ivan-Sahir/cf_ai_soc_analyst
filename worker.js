@@ -14,17 +14,23 @@ export default {
     const userInput = await request.json();
     const userLog = userInput.log_line; 
 
+    const logFingerprint = "rawLog_" + btoa(userLog)
+
+    const existingAnalysis = await env.HISTORY.get(logFingerprint)
+
+    if(existingAnalysis) {
+      return new Response(existingAnalysis, {headers: corsHeaders});
+    }
+
     const aiResponse = await env.AI.run("@cf/meta/llama-3-8b-instruct", {
       messages: [
         { role: "system", content: "You are a SOC Analyst. Explain why this log is dangerous." },
         { role: "user", content: userLog }
       ]
     });
-
-    const timeKey = Date.now().toString(); 
     
 
-    await env.HISTORY.put(timeKey, JSON.stringify({
+    await env.HISTORY.put(logFingerprint, JSON.stringify({
         log: userLog,
         analysis: aiResponse.response
     }));
