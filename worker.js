@@ -32,15 +32,12 @@ export default {
 
     await env.HISTORY.put(logFingerprint, JSON.stringify({
         log: userLog,
-        analysis: aiResponse.response
+        repsonse: aiResponse.response
     }));
 
 
-    return new Response(JSON.stringify({ analysis: aiResponse.response }), {
-      headers: { 
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json"
-      }
+    return new Response(JSON.stringify(aiResponse.response), {
+      headers: corsHeaders
     });
   }
 };
