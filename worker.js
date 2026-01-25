@@ -36,7 +36,7 @@ export default {
     }));
 
 
-    return new Response(JSON.stringify(aiResponse.response), {
+    return new Response(JSON.stringify({ response: aiResponse.response }), {
       headers: corsHeaders
     });
   }
