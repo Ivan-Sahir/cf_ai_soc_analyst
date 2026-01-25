@@ -2,7 +2,7 @@ export default {
   async fetch(request, env) {
     const corsHeaders = {
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST", OPTIONS",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type",
     };
 
@@ -36,7 +36,7 @@ export default {
     }));
 
 
-    return new Response(JSON.stringify(aiResponse), {
+    return new Response(JSON.stringify({ analysis: aiResponse.response }), {
       headers: { 
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json"
