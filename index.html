@@ -23,7 +23,7 @@
         <h1>
             <span>SOC Analyst AI</span>
         </h1>
-        <p>Paste a suspicious raw server log below. The AI will identify the attack vector and suggest a WAF rule.</p>
+        <p>Paste a suspicious raw server log below. The AI will identify the attack vectore.</p>
         
         <textarea id="logInput" placeholder='Example: 192.168.1.5 - - [15/Dec/2025:10:00:00] "GET /product?id=1 UNION SELECT user, password FROM users" 200 500'></textarea>
         
@@ -36,27 +36,46 @@
         async function analyzeLog() {
             const inputField = document.getElementById('logInput');
             const resultBox = document.getElementById('result');
-            
 
+            const max_length = 10000
+            
             resultBox.style.display = 'block';
             resultBox.innerHTML = "Analyzing...";
 
+            let userInput = inputField.value
+
+            if (userInput.length > max_length){
+                console.warn("Input too large. Truncating...")
+
+                userInput = userInput.substring(0, max_lenght)
+            }
+
             const WORKER_URL = "https://cf-ai-soc-analyst.ryan-benson-lab.workers.dev/";
 
-            const workerResponse = await fetch(WORKER_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ log_line: inputField.value }) 
-            });
-            
-            const analysisResult = await workerResponse.json();
+            try {
+                const workerResponse = await fetch(WORKER_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ log_line: userInput }) 
+                });
+                
+                if (!workerResponse.ok) {
+                    throw new Error(`HTTP Error ${workerResponse.status}`);
+                }
 
-            if (analysisResult) {
-                resultBox.innerHTML = analysisResult.response;
-            } else {
-                resultBox.innerHTML = "Error: AI could not analyze this log.";
+                const analysisResult = await workerResponse.json();
+
+                if (analysisResult) {
+                    resultBox.innerHTML = analysisResult.response;
+                } else {
+                    resultBox.innerHTML = "Analysis failed.";
+                }
+            } 
+                
+            catch (error) {
+                console.error("Crash prevented:", error);
+                resultBox.innerHTML = "Connection error.";
             }
-        }
     </script>
 </body>
 </html>
