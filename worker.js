@@ -34,12 +34,13 @@ export default {
     const userLog = userInput.log_line; 
 
     let cleanLog = userLog.replace(/^\w{3}\s+\d+\s+\d{2}:\d{2}:\d{2}\s+/, "");
+
+    cleanLog = cleanLog.replace(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+/g, "[EMAIL_REDACTED]");
       
     if (!cleanLog) cleanLog = userLog;
 
     const logFingerprint = "normalized_" + btoa(cleanLog);
 
-  
     const existingAnalysis = await env.HISTORY.get(logFingerprint)
 
     if(existingAnalysis) {
