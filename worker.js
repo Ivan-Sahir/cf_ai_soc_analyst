@@ -41,6 +41,7 @@ export default {
 
     const logFingerprint = "normalized_" + btoa(cleanLog);
 
+  
     const existingAnalysis = await env.HISTORY.get(logFingerprint)
 
     if(existingAnalysis) {
